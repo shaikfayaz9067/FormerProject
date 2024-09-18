@@ -1,0 +1,270 @@
+<div class="my-4 text-center">
+  <h2>Order Placement</h2>
+</div>
+
+<div class="container my-5">
+  <!-- Farmer Information -->
+  <div class="card p-4 shadow-sm">
+    <h4 class="card-title">Farmer Information</h4>
+    <form (ngSubmit)="addOrder()" #orderForm="ngForm">
+      <!-- Farmer Name -->
+      <div class="mb-3">
+        <label class="form-label" for="farmerName">Farmer Name:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="farmerName"
+          [(ngModel)]="newOrder.farmerName"
+          name="farmerName"
+          required
+          #farmerName="ngModel"
+        />
+        <!-- Validation -->
+        <div *ngIf="farmerName.invalid && (farmerName.dirty || farmerName.touched)" class="text-danger">
+          <div *ngIf="farmerName.errors?.['required']">Farmer Name is required.</div>
+        </div>
+      </div>
+
+      <!-- Mobile Number -->
+      <div class="mb-3">
+        <label class="form-label" for="phoneNumber">Mobile Number:</label>
+        <input
+          class="form-control"
+          type="number"
+          id="phoneNumber"
+          [(ngModel)]="newOrder.phoneNumber"
+          name="phoneNumber"
+          required
+          minlength="10"
+          maxlength="10"
+          pattern="[0-9]{10}"
+          #phoneNumber="ngModel"
+        />
+        <!-- Validation -->
+        <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="text-danger">
+          <div *ngIf="phoneNumber.errors?.['required']">Phone number is required.</div>
+          <div *ngIf="phoneNumber.errors?.['pattern']">Phone number must contain 10 digits.</div>
+        </div>
+      </div>
+
+      <!-- Product Information -->
+      <div class="card p-4 shadow-sm my-4">
+        <h4 class="card-title">Add Product</h4>
+
+        <!-- Category -->
+        <div class="mb-3">
+          <label class="form-label" for="category">Category:</label>
+          <select
+            id="category"
+            class="form-select"
+            [(ngModel)]="selectedCategory"
+            (change)="onCategoryChange($event)"
+            name="category"
+            required
+            #category="ngModel"
+          >
+            <option value="">Select a category</option>
+            <option *ngFor="let category of categories" [value]="category.name">
+              {{ category.name }} (Price: {{ category.price }}, Weight: {{ category.weight }} kg)
+            </option>
+          </select>
+        </div>
+
+        <!-- Number of Products -->
+        <div class="mb-3">
+          <label class="form-label" for="quantity">Number of Products:</label>
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="newProduct.quantity"
+            name="quantity"
+            required
+            (ngModelChange)="calculateTotalProductAmount()"
+          />
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3">
+          <label class="form-label" for="price">Price (Per Unit):</label>
+          <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="newProduct.price"
+            name="price"
+            readonly
+          />
+        </div>
+
+        <!-- Total Amount -->
+        <div class="mb-3">
+          <h5>Total Amount: {{ newProduct.totalPrice | currency:'INR' }}</h5>
+        </div>
+      </div>
+      <!-- product summary -->
+      <div class="card p-4 shadow-sm my-5" *ngIf="newOrder.products.length">
+        <h4 class="card-title">Order Summary</h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of newOrder.products">
+              <td>{{ product.category?.name }}</td>
+              <td>{{ product.quantity }}</td>
+              <td>{{ product.price | currency:'INR' }}</td>
+              <td>{{ product.totalPrice | currency:'INR' }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h5>Total Amount of All Products: {{ totalAmountOfAllProducts | currency:'INR' }}</h5>
+       
+      </div>
+
+      <!-- Transport Information -->
+      <div class="mb-3">
+        <label class="form-label" for="vehicleType">Vehicle Type:</label>
+        <select
+          class="form-select"
+          [(ngModel)]="selectedTransportType"
+          (change)="onVehicleTypeChange($event)"
+          name="vehicleType"
+          required
+        >
+          <option value="">Select vehicle type</option>
+          <option *ngFor="let transport of transportTypes" [value]="transport">
+            {{ transport }}
+          </option>
+        </select>
+      </div>
+      
+      <!-- Table to show vehicles of the selected type -->
+      <div *ngIf="filteredTransports.length > 0" class="card p-4 shadow-sm my-4">
+        <h4 class="card-title">Available Vehicles</h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Vehicle Number</th>
+              <th>Vehicle Photo</th>
+              <th>Driver Phone</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transport of filteredTransports">
+              <td>{{ transport.vehicleNumber }}</td>
+              <td><img [src]="transport.vehiclePhoto" alt="vehicle photo" width="50" /></td>
+              <td>{{ transport.driverPhoneNumber }}</td>
+              <td>
+                <button class="btn btn-primary btn-sm" (click)="selectTransport(transport)">
+                  Select
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>  
+    </form>
+  </div>
+
+    <!-- order summary -->
+    <div class="card p-4 shadow-sm my-5" *ngIf="newOrder.products.length">
+      <h4 class="card-title">Order Summary</h4>
+      <div class="mb-3">
+        <h5>Farmer Name: {{ newOrder.farmerName }}</h5>
+        <h5>Phone Number: {{ newOrder.phoneNumber }}</h5>
+        <h5>Total Amount of All Products: {{ newOrder.totalAmountAllProducts | currency:'INR' }}</h5>
+        <button class="btn btn-info" (click)="showAddressForm = true">Add Address</button>
+      </div>
+    </div>
+
+    <div class="card p-4 shadow-sm my-5" *ngIf="showAddressForm">
+    <h4 class="card-title">Address Information</h4>
+    <form (ngSubmit)="addAddress()" #addressForm="ngForm">
+      <!-- Country -->
+      <div class="mb-3">
+        <label class="form-label" for="country">Country:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="country"
+          [(ngModel)]="newAddress.country"
+          name="country"
+          required
+          [value]="'India'"
+        />
+      </div>
+      <!-- State -->
+      <div class="mb-3">
+        <label class="form-label" for="state">State:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="state"
+          [(ngModel)]="newAddress.state"
+          name="state"
+          required
+        />
+      </div>
+      <!-- City -->
+      <div class="mb-3">
+        <label class="form-label" for="city">City:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="city"
+          [(ngModel)]="newAddress.city"
+          name="city"
+          required
+        />
+      </div>
+      <!-- Town/Village -->
+      <div class="mb-3">
+        <label class="form-label" for="town">Town/Village:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="town"
+          [(ngModel)]="newAddress.townOrVillage"
+          name="town"
+          required
+        />
+      </div>
+      <!-- House Number -->
+      <div class="mb-3">
+        <label class="form-label" for="houseNumber">House Number:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="houseNumber"
+          [(ngModel)]="newAddress.houseNumber"
+          name="houseNumber"
+          required
+        />
+      </div>
+      <!-- Pin Code -->
+      <div class="mb-3">
+        <label class="form-label" for="pinCode">Pin Code:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="pinCode"
+          [(ngModel)]="newAddress.pinCode"
+          name="pinCode"
+          required
+        />
+      </div>
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary">Add Address</button>
+    </form>
+  </div>
+
+  <div class="text-center">
+    <button type="submit" class="btn btn-primary" [disabled]="!orderForm.valid">Submit Order</button>
+    <button class="btn btn-success" (click)="checkout()">Checkout</button>
+  </div>
+</div>

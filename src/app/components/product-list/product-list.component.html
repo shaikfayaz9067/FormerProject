@@ -1,11 +1,11 @@
-<div class="my-4" style="text-align: center;"><h2>The Former Project</h2></div>
+<!-- <div class="my-4" style="text-align: center;"><h2>The Former Project</h2></div>
 
 <div class="container my-5">
     <div class="card p-4 shadow-sm">
       <h4 class="card-title">Add a New Product</h4>
-      <form (ngSubmit)="addProduct()" #productForm="ngForm">
+      <form (ngSubmit)="addProduct()" #productForm="ngForm"> -->
         <!-- Former Name -->
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label class="form-label" for="formerName">Former Name:</label>
           <input
             class="form-control"
@@ -15,15 +15,15 @@
             name="formerName"
             required
             #formerName="ngModel"
-          />
+          /> -->
           <!-- Validation messages -->
-          <div *ngIf="formerName.invalid && (formerName.dirty || formerName.touched || isSubmitted)" class="text-danger">
+          <!-- <div *ngIf="formerName.invalid && (formerName.dirty || formerName.touched || isSubmitted)" class="text-danger">
             <div *ngIf="formerName.errors?.['required']">Former Name is required.</div>
           </div>
         </div>
-  
+   -->
         <!-- Mobile Number -->
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label class="form-label" for="phoneNumber">Mobile Number:</label>
           <input
             type="number"
@@ -36,19 +36,19 @@
             maxlength="10"
             pattern="[0-9]{10}"
             #phoneNumber="ngModel"
-          />
+          /> -->
           <!-- Validation messages -->
-          <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched || isSubmitted)" class="text-danger">
+          <!-- <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched || isSubmitted)" class="text-danger">
             <div *ngIf="phoneNumber.errors?.['required']">Phone number is required.</div>
             <div *ngIf="phoneNumber.errors?.['minlength'] || phoneNumber.errors?.['maxlength']">
               Phone number must be exactly 10 digits long.
             </div>
             <div *ngIf="phoneNumber.errors?.['pattern']">Phone number must only contain digits.</div>
           </div>
-        </div>
+        </div> -->
   
         <!-- Category -->
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label class="form-label" for="category">Category:</label>
           <select
             id="category"
@@ -58,18 +58,18 @@
             name="category"
             required
             #category="ngModel"
-          >
-            <option value="">Select a category</option>
+          > -->
+            <!-- <option value="">Select a category</option>
             <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
-          </select>
+          </select> -->
           <!-- Validation messages -->
-          <div *ngIf="category.invalid && (category.dirty || category.touched || isSubmitted)" class="text-danger">
+          <!-- <div *ngIf="category.invalid && (category.dirty || category.touched || isSubmitted)" class="text-danger">
             <div *ngIf="category.errors?.['required']">Category is required.</div>
           </div>
-        </div>
+        </div> -->
   
         <!-- Price of Bags -->
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label class="form-label" for="priceOfBags">
             Price of Bags
             <span *ngIf="selectedCategory"> (Weight: {{ selectedCategory.weight }} kg)</span>:
@@ -83,15 +83,15 @@
             required
             readonly
             #priceOfBags="ngModel"
-          />
+          /> -->
           <!-- Validation messages -->
-          <div *ngIf="priceOfBags.invalid && (priceOfBags.dirty || priceOfBags.touched || isSubmitted)" class="text-danger">
+          <!-- <div *ngIf="priceOfBags.invalid && (priceOfBags.dirty || priceOfBags.touched || isSubmitted)" class="text-danger">
             <div *ngIf="priceOfBags.errors?.['required']">Price of Bags is required.</div>
           </div>
-        </div>
+        </div> -->
   
         <!-- Number of Bags -->
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label class="form-label" for="numOfBags">Number of Bags:</label>
           <input
             type="number"
@@ -102,26 +102,26 @@
             required
             #numOfBags="ngModel"
             (ngModelChange)="calculateTotalAmount()"
-          />
+          /> -->
           <!-- Validation messages -->
-          <div *ngIf="numOfBags.invalid && (numOfBags.dirty || numOfBags.touched || isSubmitted)" class="text-danger">
+          <!-- <div *ngIf="numOfBags.invalid && (numOfBags.dirty || numOfBags.touched || isSubmitted)" class="text-danger">
             <div *ngIf="numOfBags.errors?.['required']">Number of Bags is required.</div>
           </div>
-        </div>
+        </div> -->
   
         <!-- Total Amount -->
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <h5>Total Amount: {{ newProduct.totalAmount | currency:'INR' }}</h5>
         </div>
-  
+   -->
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Add Product</button>
+        <!-- <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Add Product</button>
       </form>
     </div>
   </div>
-  
+   -->
   <!-- Product List -->
-  <div class="container my-5">
+  <!-- <div class="container my-5">
     <div class="card p-4 shadow-sm">
       <h4 class="card-title">Product List</h4>
       <table class="table table-striped">
@@ -160,4 +160,4 @@
       </div>
     </div>
   </div>
-  
+   -->

@@ -1,11 +1,9 @@
-export interface Product{
-    id?:string;
-    formerName:string;
-    phoneNumber:number;
-    weight:number;
-    category:string;
-    numOfBags:number;
-    priceOfBags:number;
-    totalAmount:number;
- 
- }
+import { Category } from './category'; // Adjust import path
+
+export interface Product {
+    id?: string;
+    category?: Category;
+    quantity: number;
+    price: number;
+    totalPrice:number;
+}
