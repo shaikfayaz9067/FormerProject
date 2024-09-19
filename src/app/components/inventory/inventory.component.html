@@ -1,61 +1,65 @@
 <div class="container mt-4">
-    <h2>Order Summary</h2>
-  
-    <!-- Check if there are orders to display -->
-    <div *ngIf="orders.length > 0; else noOrders">
-      <table class="table table-bordered table-striped">
-        <thead class="table-dark">
-          <tr>
-            <th>Order ID</th>
-            <th>Farmer Name</th>
-            <th>Phone Number</th>
-            <th>Products</th>
-            <th>Total Amount</th>
-            <th>Purchase Date</th>
-            <th>Address</th>
-            <th>Transport</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let order of orders">
-            <td>{{ order.id }}</td>
-            <td>{{ order.farmerName }}</td>
-            <td>{{ order.phoneNumber }}</td>
-  
-            <!-- Display products inside the order -->
-            <td>
-              <ul>
-                <li *ngFor="let product of order.products">
-                  {{ product.category?.name }} (x{{ product.quantity }}): {{ product.price | currency:'INR' }} 
-                  Total: {{ product.totalPrice | currency:'INR' }}
-                </li>
-              </ul>
-            </td>
-  
-            <td>{{ order.totalAmountAllProducts | currency }}</td> <!-- Use currency pipe -->
-            <td>{{ order.purchaseDate | date: 'medium' }}</td> <!-- Use date pipe -->
-            <td>
-              {{ order.address.houseNumber }},
-              {{ order.address.townOrVillage }},
-              {{ order.address.city }},
-              {{ order.address.state }},
-              {{ order.address.country }} - {{ order.address.pinCode }}
-            </td>
-            <td>
-              <div>
-                Vehicle Type: {{ order.transport.vehicleType }}<br />
-                Vehicle Number: {{ order.transport.vehicleNumber }}<br />
-                Driver Phone: {{ order.transport.driverPhoneNumber }}
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <!-- Fallback if there are no orders -->
-    <ng-template #noOrders>
-      <p>No orders found.</p>
-    </ng-template>
+  <h2>Order Summary</h2>
+
+  <!-- Check if there are orders to display -->
+  <div *ngIf="orders.length > 0; else noOrders">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Order ID</th>
+          <th>Farmer Name</th>
+          <th>Phone Number</th>
+          <th>Products</th>
+          <th>Total Amount</th>
+          <th>Purchase Date</th>
+          <th>Address</th>
+          <th>Transport</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.id }}</td>
+          <td>{{ order.farmerName }}</td>
+          <td>{{ order.phoneNumber }}</td>
+
+          <!-- Display products inside the order -->
+          <td>
+            <ul>
+              <li *ngFor="let product of order.products">
+                {{ product.category?.name }} (x{{ product.quantity }}): {{ product.price | currency:'INR' }}
+                Total: {{ product.totalPrice | currency:'INR' }}
+              </li>
+            </ul>
+          </td>
+
+          <td>{{ order.totalAmountAllProducts | currency:'INR'}}</td>
+          <td>{{ order.purchaseDate | date: 'medium' }}</td>
+          <td>
+            {{ order.address.houseNumber }},
+            {{ order.address.townOrVillage }},
+            {{ order.address.city }},
+            {{ order.address.state }},
+            {{ order.address.country }} - {{ order.address.pinCode }}
+          </td>
+          <td>
+            <div>
+              Vehicle Type: {{ order.transport.vehicleType }}<br />
+              Vehicle Number: {{ order.transport.vehicleNumber }}<br />
+              Driver Phone: {{ order.transport.driverPhoneNumber }}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+
+  <!-- Fallback if there are no orders -->
+  <ng-template #noOrders>
+    <p>No orders found.</p>
+  </ng-template>
+
+  <!-- Right-aligned Logout button -->
+  <div class="logout-container">
+    <button (click)="onLogout()" class="btn btn-logout">Logout</button>
+  </div>
+</div>

@@ -52,7 +52,7 @@
         <h4 class="card-title">Add Product</h4>
 
         <!-- Category -->
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label class="form-label" for="category">Category:</label>
           <select
             id="category"
@@ -68,8 +68,40 @@
               {{ category.name }} (Price: {{ category.price }}, Weight: {{ category.weight }} kg)
             </option>
           </select>
+        </div> -->
+        <div>
+          <label class="form-label" for="category">Category:</label>
+          <select
+            id="category"
+            class="form-select"
+            [(ngModel)]="newProduct.category"
+            (change)="onCategoryChange($event)"
+            name="category"
+            required
+            #category="ngModel"
+          >
+            <option value="">Select a category</option>
+            <option *ngFor="let category of categories" [value]="category.name">
+              {{ category.name }}
+            </option>
+          </select>
+        
+          <!-- Show the selected category name -->
+          <div *ngIf="newProduct.category">
+            <p>Selected Category: {{ newProduct.category.name }}</p>
+          </div>
+        
+          <!-- Show the weight of the bag after category selection -->
+          <div *ngIf="newProduct.category && newProduct.category.weight">
+            <p>Weight of the Bag: {{ newProduct.category.weight }} kg</p>
+          </div>
+        
+          <!-- Validation messages -->
+          <div *ngIf="category.invalid && (category.dirty || category.touched)" class="text-danger">
+            <div *ngIf="category.errors?.['required']">Category is required.</div>
+          </div>
         </div>
-
+        
         <!-- Number of Products -->
         <div class="mb-3">
           <label class="form-label" for="quantity">Number of Products:</label>
@@ -110,7 +142,7 @@
 
       <!-- product summary -->
       <div class="card p-4 shadow-sm my-5" *ngIf="newOrder.products.length">
-        <h4 class="card-title">Order Summary</h4>
+        <h4 class="card-title">Product Summary</h4>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -118,6 +150,7 @@
               <th>Quantity</th>
               <th>Price</th>
               <th>Total Price</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -126,12 +159,15 @@
               <td>{{ product.quantity }}</td>
               <td>{{ product.price | currency:'INR' }}</td>
               <td>{{ product.totalPrice | currency:'INR' }}</td>
+              <td>
+                <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Delete</button>
+              </td>
             </tr>
           </tbody>
         </table>
         <h5>Total Amount of All Products: {{ totalAmountOfAllProducts | currency:'INR' }}</h5>
-       
       </div>
+      
 
       <!-- Transport Information -->
       <div class="mb-3">
@@ -168,7 +204,7 @@
               <td><img [src]="transport.vehiclePhoto" alt="vehicle photo" width="50" /></td>
               <td>{{ transport.driverPhoneNumber }}</td>
               <td>
-                <button class="btn btn-primary btn-sm" (click)="selectTransport(transport)">
+                <button class="btn btn-primary btn-sm" type="button"  (click)="selectTransport(transport)">
                   Select
                 </button>
               </td>
@@ -186,7 +222,11 @@
         <h5>Farmer Name: {{ newOrder.farmerName }}</h5>
         <h5>Phone Number: {{ newOrder.phoneNumber }}</h5>
         <h5>Total Amount of All Products: {{ newOrder.totalAmountAllProducts | currency:'INR' }}</h5>
-        <button class="btn btn-info" (click)="showAddressForm = true">Add Address</button>
+        <h5 *ngIf="newOrder.transport.vehicleType">Selected Vehicle Type: {{ newOrder.transport.vehicleType }}</h5>
+        <h5 *ngIf="newOrder.transport.vehicleNumber">Vehicle Number: {{ newOrder.transport.vehicleNumber }}</h5>
+        <h5 *ngIf="newOrder.transport.driverPhoneNumber">Driver Phone: {{ newOrder.transport.driverPhoneNumber }}</h5>
+    
+        <button class="btn btn-info" type="button" (click)="showAddressForm = true">Add Address</button>
       </div>
     </div>
 
@@ -271,8 +311,8 @@
     </form>
   </div>
 
-  <div class="text-center">
-    <button type="submit" class="btn btn-primary" [disabled]="!orderForm.valid">Submit Order</button>
-    <button class="btn btn-success" (click)="checkout()">Checkout</button>
+  <div class="text-center mt-3">
+    <button type="submit" class="btn btn-primary" [disabled]="!orderForm.valid || !addressAdded " (click)="checkout()">Submit & Checkout</button>
+    <!-- <button class="btn btn-success" (click)="checkout()">Checkout</button> -->
   </div>
 </div>

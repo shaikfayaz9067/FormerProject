@@ -68,11 +68,12 @@ export class OrderListComponent implements OnInit{
   isSubmitted: boolean = false;
   totalAmountOfAllProducts: number | undefined;
   showAddressForm: boolean = false;
+  addressAdded: boolean = false;
 
   // Add product to order
   constructor(
     private orderService:OrderService ,
-    private productServive: ProductService, 
+    private productService: ProductService, 
     private transportService:TransportService,
     private router:Router
   ){
@@ -86,7 +87,7 @@ export class OrderListComponent implements OnInit{
   }
 
   loadCategories() {
-    this.productServive.getCategories().subscribe(categories => {
+    this.productService.getCategories().subscribe(categories => {
       this.categories = categories;
     });
   }
@@ -115,8 +116,20 @@ export class OrderListComponent implements OnInit{
   }
 
   addOrder() {
-    if (this.newOrder.products.length > 0 && this.newOrder.transport.vehicleType) {
+    // Ensure the order has at least one product, a selected vehicle, and a complete address
+
+    if (
+      this.newOrder.products.length > 0 &&
+      this.newOrder.transport.vehicleType &&
+      this.newOrder.address.country &&
+      this.newOrder.address.state &&
+      this.newOrder.address.city &&
+      this.newOrder.address.townOrVillage &&
+      this.newOrder.address.houseNumber &&
+      this.newOrder.address.pinCode
+    ) {
       console.log('Order placed:', this.newOrder);
+      // this.checkout();
     } else {
       console.log('Order is missing required fields.');
     }
@@ -125,19 +138,26 @@ export class OrderListComponent implements OnInit{
   onCategoryChange(event: any) {
     const selectedCategoryName = event.target.value;
     this.selectedCategory = this.categories.find(category => category.name === selectedCategoryName) || null;
+
     if (this.selectedCategory) {
-      // this.newProduct.category?.name=this.selectedCategory.name;
+
       this.newProduct.category = { ...this.selectedCategory };
       this.newProduct.price = this.selectedCategory.price;
+      this.calculateTotalProductAmount()
     }
+ 
   }
 
   calculateTotalAmount() {
-    this.newOrder.totalAmountAllProducts = this.newOrder.products.reduce(
+    const total = this.newOrder.products.reduce(
       (total, product) => total + product.totalPrice,
       0
-    );
+    ); 
+    this.totalAmountOfAllProducts=total;
+    this.newOrder.totalAmountAllProducts=total;
+
   }
+  
 
   onVehicleTypeChange(event: any): void {
     const selectedType = event.target.value;
@@ -181,6 +201,7 @@ export class OrderListComponent implements OnInit{
     // Logic to handle address addition
     this.newOrder.address = { ...this.newAddress };
     console.log('Address:', this.newAddress);
+    this.addressAdded = true;
 
 
     this.showAddressForm = false; // Hide address form after submission
@@ -188,8 +209,9 @@ export class OrderListComponent implements OnInit{
 
   deleteProduct(id: string | undefined) {
     this.newOrder.products = this.newOrder.products.filter(product => product.id !== id);
-    this.calculateTotalAmount();
+    this.calculateTotalAmount();  // Recalculate the total amount after deleting the product
   }
+  
 
   calculateTotalProductAmount() {
     if (this.newProduct.price && this.newProduct.quantity) {
