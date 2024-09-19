@@ -9,7 +9,6 @@ export interface Order {
     products: Product[];
     transport: Transport;
     totalAmountAllProducts: number;
-    purchaseDate: string;
-    address:Address;
-     // Use ISO string format
+    purchaseDate: string;// Use ISO string format
+    address:Address 
 }

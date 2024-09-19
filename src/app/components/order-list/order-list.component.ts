@@ -126,6 +126,8 @@ export class OrderListComponent implements OnInit{
     const selectedCategoryName = event.target.value;
     this.selectedCategory = this.categories.find(category => category.name === selectedCategoryName) || null;
     if (this.selectedCategory) {
+      // this.newProduct.category?.name=this.selectedCategory.name;
+      this.newProduct.category = { ...this.selectedCategory };
       this.newProduct.price = this.selectedCategory.price;
     }
   }

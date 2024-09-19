@@ -8,7 +8,7 @@ import { Order } from '../../models/order';  // Import your Order model here
 })
 export class OrderService {
 
-  private apiUrl = 'http://localhost:8080/api/orders';  // Backend API URL
+  private apiUrl = 'http://localhost:8081/api/orders';  // Backend API URL
 
   constructor(private http: HttpClient) { }
 

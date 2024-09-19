@@ -1,6 +1,6 @@
 /* login.component.scss */
 .login-container {
-    background-image: url('/assets/bg-image.jpg');
+    background-image: url('/assets/photos/bg-image.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

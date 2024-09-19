@@ -99,7 +99,15 @@
         <div class="mb-3">
           <h5>Total Amount: {{ newProduct.totalPrice | currency:'INR' }}</h5>
         </div>
+
+        <div>
+          <button type="button" (click)="addProduct()" class="btn btn-primary">Add Product</button>
+        </div>
       </div>
+
+     
+
+
       <!-- product summary -->
       <div class="card p-4 shadow-sm my-5" *ngIf="newOrder.products.length">
         <h4 class="card-title">Order Summary</h4>

@@ -4,6 +4,6 @@ export interface Address {
     city: string;
     townOrVillage: string;
     houseNumber: string;
-    pinCode: string;
+    pinCode: number;
   }
   

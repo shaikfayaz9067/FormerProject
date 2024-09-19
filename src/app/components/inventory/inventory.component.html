@@ -26,8 +26,8 @@
             <td>
               <ul>
                 <li *ngFor="let product of order.products">
-                  {{ product.category?.name }} (x{{ product.quantity }}): {{ product.price | currency }} 
-                  Total: {{ product.totalPrice | currency }}
+                  {{ product.category?.name }} (x{{ product.quantity }}): {{ product.price | currency:'INR' }} 
+                  Total: {{ product.totalPrice | currency:'INR' }}
                 </li>
               </ul>
             </td>
