@@ -1,0 +1,220 @@
+<!-- the transport code  -->
+
+<!-- <div class="card p-4 shadow-sm my-5" *ngIf="showAddressForm"></div>
+    <h4 class="card-title">Address Information</h4>
+    <form (ngSubmit)="addAddress()" #addressForm="ngForm"> -->
+<!-- Country -->
+<!-- <div class="mb-3">
+        <label class="form-label" for="country">Country:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="country"
+          [(ngModel)]="newAddress.country"
+          name="country"
+          required
+          [value]="'India'"
+        />
+      </div> -->
+<!-- State -->
+<!-- <div class="mb-3">
+        <label class="form-label" for="state">State:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="state"
+          [(ngModel)]="newAddress.state"
+          name="state"
+          required
+        />
+      </div> -->
+<!-- City -->
+<!-- <div class="mb-3">
+        <label class="form-label" for="city">City:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="city"
+          [(ngModel)]="newAddress.city"
+          name="city"
+          required
+        />
+      </div> -->
+<!-- Town/Village -->
+<!-- <div class="mb-3">
+        <label class="form-label" for="town">Town/Village:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="town"
+          [(ngModel)]="newAddress.townOrVillage"
+          name="town"
+          required
+        />
+      </div> -->
+<!-- House Number -->
+<!-- <div class="mb-3">
+        <label class="form-label" for="houseNumber">House Number:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="houseNumber"
+          [(ngModel)]="newAddress.houseNumber"
+          name="houseNumber"
+          required
+        />
+      </div> -->
+<!-- Pin Code -->
+<!-- <div class="mb-3">
+        <label class="form-label" for="pinCode">Pin Code:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="pinCode"
+          [(ngModel)]="newAddress.pinCode"
+          name="pinCode"
+          required
+        />
+      </div> -->
+<!-- Submit Button -->
+<!-- <button type="submit" class="btn btn-primary">Add Address</button>
+    </form>
+  </div> -->
+
+<!-- <div class="mb-3"></div>
+        <label class="form-label" for="vehicleType">Vehicle Type:</label>
+        <select
+          class="form-select"
+          [(ngModel)]="selectedTransportType"
+          (change)="onVehicleTypeChange($event)"
+          name="vehicleType"
+          required
+        >
+          <option value="">Select vehicle type</option>
+          <option *ngFor="let transport of transportTypes" [value]="transport">
+            {{ transport }}
+          </option>
+        </select>
+      </div> -->
+
+<!-- the vehicle code -->
+
+<!-- <div class="card p-4 shadow-sm my-4"></div>
+        <h4 class="card-title">Add Vehicle Details</h4>
+        <form (ngSubmit)="addTransportToOrder()" #vehicleForm="ngForm">
+          <div class="mb-3">
+            <label class="form-label" for="vehicleType">Vehicle Type:</label>
+            <input
+              class="form-control"
+              type="text"
+              id="vehicleType"
+              [(ngModel)]="transportDetails.vehicleType"
+              name="vehicleType"
+              required
+              #vehicleType="ngModel"
+            /> -->
+<!-- Error message for vehicleType -->
+<!-- <div
+              *ngIf="vehicleType.invalid && vehicleType.touched"
+              class="text-danger"
+            >
+              Vehicle type is required.
+            </div>
+          </div> -->
+
+<!-- <div class="mb-3">
+            <label class="form-label" for="vehicleNumber"
+              >Vehicle Number:</label
+            >
+            <input
+              class="form-control"
+              type="text"
+              id="vehicleNumber"
+              [(ngModel)]="transportDetails.vehicleNumber"
+              name="vehicleNumber"
+              required
+              #vehicleNumber="ngModel"
+            /> -->
+<!-- Error message for vehicleNumber -->
+<!-- <div
+              *ngIf="vehicleNumber.invalid && vehicleNumber.touched"
+              class="text-danger"
+            >
+              Vehicle number is required.
+            </div>
+          </div> -->
+
+<!-- <div class="mb-3">
+            <label class="form-label" for="driverName">Driver Name:</label>
+            <input
+              class="form-control"
+              type="text"
+              id="driverName"
+              [(ngModel)]="transportDetails.driverName"
+              name="driverName"
+              required
+              #driverName="ngModel"
+            /> -->
+<!-- Error message for driverName -->
+<!-- <div
+              *ngIf="driverName.invalid && driverName.touched"
+              class="text-danger"
+            >
+              Driver name is required.
+            </div>
+          </div> -->
+
+<!-- <div class="mb-3">
+            <label class="form-label" for="driverPhone"
+              >Driver Phone Number:</label
+            >
+            <input
+              class="form-control"
+              type="tel"
+              id="driverPhone"
+              [(ngModel)]="transportDetails.driverPhoneNumber"
+              name="driverPhone"
+              required
+              pattern="[0-9]{10}"
+              #driverPhone="ngModel"
+            /> -->
+<!-- Error message for driverPhone -->
+<!-- <div
+              *ngIf="driverPhone.invalid && driverPhone.touched"
+              class="text-danger"
+            >
+              Phone number must be 10 digits.
+            </div>
+          </div> -->
+
+<!-- <div class="mb-3">
+            <label class="form-label" for="vehiclePhoto">Vehicle Photo</label>
+            <input
+              class="form-control"
+              type="file"
+              id="vehiclePhoto"
+              (change)="onFileSelected($event)"
+              name="vehiclePhoto"
+              required
+              #vehiclePhoto=""
+            /> -->
+<!-- Error message for vehiclePhoto -->
+<!-- <div
+              *ngIf="vehiclePhoto.invalid && vehiclePhoto.touched"
+              class="text-danger"
+            >
+              Vehicle photo is required.
+            </div> -->
+<!-- </div> -->
+
+<!-- Disable the button unless the form is valid -->
+
+<!-- <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="vehicleForm.invalid"
+          >
+            Add Vehicle to Order
+          </button>
+        </form>
+      </div> -->

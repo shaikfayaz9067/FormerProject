@@ -1,7 +1,7 @@
 // import { Component, OnInit } from '@angular/core';
 // import { Product } from 'src/app/models/product';
 // import { ProductService } from 'src/app/services/product/product.service';
-// import { Category } from 'src/app/models/category'; 
+// import { Category } from 'src/app/models/category';
 
 // @Component({
 //   selector: 'app-product-list',
@@ -23,7 +23,7 @@
 //     priceOfBags: 0,
 //     totalAmount: 0
 //   };
-  
+
 //   selectedCategory: Category | null = null;
 //   isSubmitted = false;
 //   totalAmountOfAllProducts: number = 0;
@@ -43,9 +43,9 @@
 //   onCategoryChange(event: any): void {
 //     const selectedCategoryName = event.target.value; // This is now the category name
 //     const selectedCategory = this.categories.find(c => c.name === selectedCategoryName);
-  
+
 //     if (selectedCategory) {
-//       this.selectedCategory = selectedCategory; 
+//       this.selectedCategory = selectedCategory;
 //       this.newProduct.category = selectedCategory.name; // Store the category name
 //       this.newProduct.priceOfBags = selectedCategory.price; // Update the price
 //       this.newProduct.weight = selectedCategory.weight;
@@ -59,9 +59,9 @@
 //     this.isSubmitted = true;
 //     if (this.newProduct.formerName && this.newProduct.phoneNumber && this.newProduct.category && this.newProduct.priceOfBags && this.newProduct.numOfBags) {
 //       this.newProduct.totalAmount = this.newProduct.numOfBags * this.newProduct.priceOfBags;
-//       this.calculateTotalAmount(); 
+//       this.calculateTotalAmount();
 //       this.products.push({ ...this.newProduct }); // Add product to the list
-//       this.calculateTotalAmountOfAllProducts(); 
+//       this.calculateTotalAmountOfAllProducts();
 //       this.resetForm();
 //     }
 //   }
@@ -70,15 +70,15 @@
 //     if (id) {
 //       this.products = this.products.filter((product) => product.id !== id);
 //     } else {
-//       console.error('Product ID is undefined'); 
+//       console.error('Product ID is undefined');
 //     }
 //   }
 
 //   checkout(): void {
 //     this.productService.checkout(this.products).subscribe(() => {
 //       alert('Checkout successful!');
-//       this.products = []; 
-//       this.calculateTotalAmountOfAllProducts(); 
+//       this.products = [];
+//       this.calculateTotalAmountOfAllProducts();
 //     });
 //   }
 

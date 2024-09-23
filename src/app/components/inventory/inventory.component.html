@@ -6,19 +6,19 @@
     <table class="table table-bordered table-striped">
       <thead class="table-dark">
         <tr>
-          <th>Order ID</th>
+          <th>Serial No.</th>
           <th>Farmer Name</th>
           <th>Phone Number</th>
           <th>Products</th>
           <th>Total Amount</th>
           <th>Purchase Date</th>
-          <th>Address</th>
           <th>Transport</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of orders">
-          <td>{{ order.id }}</td>
+        <tr *ngFor="let order of orders; let i = index">
+          <td>{{ i + 1 }}</td>
+          <!-- Serial number -->
           <td>{{ order.farmerName }}</td>
           <td>{{ order.phoneNumber }}</td>
 
@@ -26,26 +26,24 @@
           <td>
             <ul>
               <li *ngFor="let product of order.products">
-                {{ product.category?.name }} (x{{ product.quantity }}): {{ product.price | currency:'INR' }}
-                Total: {{ product.totalPrice | currency:'INR' }}
+                {{ product.category?.name }} (x{{ product.quantity }}):
+                {{ product.price | currency : "INR" }} Total:
+                {{ product.totalPrice | currency : "INR" }}
               </li>
             </ul>
           </td>
 
-          <td>{{ order.totalAmountAllProducts | currency:'INR'}}</td>
-          <td>{{ order.purchaseDate | date: 'medium' }}</td>
+          <td>{{ order.totalAmountAllProducts | currency : "INR" }}</td>
+          <td>{{ order.purchaseDate | date : "medium" }}</td>
+
           <td>
-            {{ order.address.houseNumber }},
-            {{ order.address.townOrVillage }},
-            {{ order.address.city }},
-            {{ order.address.state }},
-            {{ order.address.country }} - {{ order.address.pinCode }}
-          </td>
-          <td>
-            <div>
-              Vehicle Type: {{ order.transport.vehicleType }}<br />
-              Vehicle Number: {{ order.transport.vehicleNumber }}<br />
-              Driver Phone: {{ order.transport.driverPhoneNumber }}
+            <div *ngFor="let transport of order.transport">
+              <strong>Vehicle Type:</strong> {{ transport.vehicleType }}<br />
+              <strong>Vehicle Number:</strong> {{ transport.vehicleNumber
+              }}<br />
+              <strong>Driver Phone:</strong> {{ transport.driverPhoneNumber
+              }}<br />
+              <br />
             </div>
           </td>
         </tr>

@@ -1,6 +1,8 @@
+import { Subcategory } from './subcategory';
+
 export interface Category {
   id?: string;
   name: string;
-  price: number;
   weight: number;
+  subcategories: Subcategory[];
 }

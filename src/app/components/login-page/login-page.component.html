@@ -1,31 +1,46 @@
 <!-- login.component.html -->
 
 <div class="login-container">
-    <div class="card login-card mx-auto my-5">
-      <div class="card-body">
-        <h5 class="card-title text-center">Login</h5>
-        <form (ngSubmit)="onLogin()">
-          <!-- Username input -->
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" [(ngModel)]="username" class="form-control" placeholder="Enter username" required>
-          </div>
-          
-          <!-- Password input -->
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" [(ngModel)]="password" class="form-control" placeholder="Enter password" required>
-          </div>
-          
-          <!-- Login button -->
-          <button type="submit" class="btn btn-primary btn-block">Login</button>
-        </form>
-  
-        <!-- Error message -->
-        <div *ngIf="loginFailed" class="mt-3 text-danger text-center">
-          Invalid username or password. Please try again.
+  <div class="card login-card mx-auto my-5">
+    <div class="card-body">
+      <h5 class="card-title text-center">Login</h5>
+      <form (ngSubmit)="onLogin()">
+        <!-- Username input -->
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            [(ngModel)]="username"
+            class="form-control"
+            placeholder="Enter username"
+            required
+          />
         </div>
+
+        <!-- Password input -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="password"
+            class="form-control"
+            placeholder="Enter password"
+            required
+          />
+        </div>
+
+        <!-- Login button -->
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+      </form>
+
+      <!-- Error message -->
+      <div *ngIf="loginFailed" class="mt-3 text-danger text-center">
+        Invalid username or password. Please try again.
       </div>
     </div>
   </div>
-  
+</div>

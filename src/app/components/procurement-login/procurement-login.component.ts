@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login/login.service';
-import { AuthService } from '../../services/auth/auth.service'; // Adjust the import path as needed
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css'],
+  selector: 'app-procurement-login',
+  templateUrl: './procurement-login.component.html',
+  styleUrls: ['./procurement-login.component.css'],
 })
-export class LoginPageComponent {
+export class ProcurementLoginComponent {
   username: string = '';
   password: string = '';
   loginFailed: boolean = false;
@@ -25,9 +25,9 @@ export class LoginPageComponent {
       .subscribe((isLoggedIn) => {
         if (isLoggedIn) {
           this.authService.login();
-          this.router.navigate(['/inventory']); // Navigate to the inventory page
+          this.router.navigate(['/orders']);
         } else {
-          this.loginFailed = true; // Show login error message
+          this.loginFailed = true;
         }
       });
   }

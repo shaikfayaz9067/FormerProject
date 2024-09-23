@@ -1,0 +1,199 @@
+<div class="container">
+  <h4 class="my-4">Add Vehicle Details</h4>
+
+  <div *ngFor="let vehicle of vehicles; let i = index">
+    <form (ngSubmit)="completeTransportDetails()" #vehicleForm="ngForm">
+      <!-- Vehicle Type Selection -->
+      <div class="mb-3">
+        <label class="form-label" for="vehicleType">Vehicle Type:</label>
+        <select
+          class="form-select"
+          [(ngModel)]="vehicle.vehicleType"
+          (change)="onVehicleTypeChange($event, i)"
+          name="vehicleType{{ i }}"
+          required
+        >
+          <option value="">Select vehicle type</option>
+          <option
+            *ngFor="let transport of transportTypes"
+            [value]="transport.type"
+          >
+            {{ transport.type }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Vehicle Number -->
+      <div class="mb-3">
+        <label class="form-label" for="vehicleNumber">Vehicle Number:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="vehicleNumber"
+          [(ngModel)]="vehicle.vehicleNumber"
+          name="vehicleNumber{{ i }}"
+          required
+          #vehicleNumber="ngModel"
+        />
+        <div
+          *ngIf="vehicleNumber.invalid && vehicleNumber.touched"
+          class="text-danger"
+        >
+          Vehicle number is required.
+        </div>
+      </div>
+
+      <!-- Driver Name -->
+      <div class="mb-3">
+        <label class="form-label" for="driverName">Driver Name:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="driverName"
+          [(ngModel)]="vehicle.driverName"
+          name="driverName{{ i }}"
+          required
+          #driverName="ngModel"
+        />
+        <div
+          *ngIf="driverName.invalid && driverName.touched"
+          class="text-danger"
+        >
+          Driver name is required.
+        </div>
+      </div>
+
+      <!-- Driver Phone Number -->
+      <div class="mb-3">
+        <label class="form-label" for="driverPhone">Driver Phone Number:</label>
+        <input
+          class="form-control"
+          type="tel"
+          id="driverPhone"
+          [(ngModel)]="vehicle.driverPhoneNumber"
+          name="driverPhone{{ i }}"
+          required
+          pattern="[0-9]{10}"
+          #driverPhone="ngModel"
+        />
+        <div
+          *ngIf="driverPhone.invalid && driverPhone.touched"
+          class="text-danger"
+        >
+          Phone number must be 10 digits.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="vehiclePhoto"
+          >Upload Vehicle Photo:</label
+        >
+        <input
+          class="form-control"
+          type="file"
+          id="vehiclePhoto"
+          (change)="onFileSelected($event, i)"
+          accept="image/*"
+        />
+      </div>
+
+      <!-- Transport Amount -->
+      <div class="mb-3">
+        <label class="form-label" for="transportAmount"
+          >Transport Amount:</label
+        >
+        <input
+          class="form-control"
+          type="number"
+          id="transportAmount"
+          [(ngModel)]="vehicle.transportAmount"
+          name="transportAmount{{ i }}"
+          required
+          #transportAmount="ngModel"
+        />
+        <div
+          *ngIf="transportAmount.invalid && transportAmount.touched"
+          class="text-danger"
+        >
+          Transport amount is required.
+        </div>
+      </div>
+
+      <!-- Weight Field -->
+      <div class="mb-3">
+        <label class="form-label" for="weight">Weight (kg):</label>
+        <input
+          class="form-control"
+          type="number"
+          id="weight"
+          [(ngModel)]="vehicle.weight"
+          name="weight{{ i }}"
+          required
+          (ngModelChange)="checkWeight(i)"
+          #weight="ngModel"
+        />
+        <div *ngIf="vehicle.weightExceeded" class="text-danger">
+          Weight exceeds vehicle capacity of {{ vehicle.capacity }} kg.
+        </div>
+      </div>
+
+      <!-- Loading Amount -->
+      <div class="mb-3">
+        <label class="form-label" for="loadingAmount">Loading Amount:</label>
+        <input
+          class="form-control"
+          type="number"
+          id="loadingAmount"
+          [(ngModel)]="vehicle.loadingAmount"
+          name="loadingAmount{{ i }}"
+          required
+          #loadingAmount="ngModel"
+        />
+        <div
+          *ngIf="loadingAmount.invalid && loadingAmount.touched"
+          class="text-danger"
+        >
+          Loading amount is required.
+        </div>
+      </div>
+
+      <!-- Unloading Amount -->
+      <div class="mb-3">
+        <label class="form-label" for="unloadingAmount"
+          >Unloading Amount:</label
+        >
+        <input
+          class="form-control"
+          type="number"
+          id="unloadingAmount"
+          [(ngModel)]="vehicle.unloadingAmount"
+          name="unloadingAmount{{ i }}"
+          required
+          #unloadingAmount="ngModel"
+        />
+        <div
+          *ngIf="unloadingAmount.invalid && unloadingAmount.touched"
+          class="text-danger"
+        >
+          Unloading amount is required.
+        </div>
+      </div>
+
+      <!-- Vehicle Photo -->
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="vehicleForm.invalid || vehicle.weightExceeded"
+      >
+        Add Vehicle to Order
+      </button>
+    </form>
+    <hr />
+  </div>
+
+  <button class="btn btn-primary" (click)="completeTransportDetails()">
+    Complete Transport
+  </button>
+</div>
