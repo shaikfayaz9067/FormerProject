@@ -2,7 +2,7 @@
   <h4 class="my-4">Add Vehicle Details</h4>
 
   <div *ngFor="let vehicle of vehicles; let i = index">
-    <form (ngSubmit)="completeTransportDetails()" #vehicleForm="ngForm">
+    <form (ngSubmit)="addVehicleFromForm(i)" #vehicleForm="ngForm">
       <!-- Vehicle Type Selection -->
       <div class="mb-3">
         <label class="form-label" for="vehicleType">Vehicle Type:</label>
@@ -68,7 +68,7 @@
         <label class="form-label" for="driverPhone">Driver Phone Number:</label>
         <input
           class="form-control"
-          type="tel"
+          type="number"
           id="driverPhone"
           [(ngModel)]="vehicle.driverPhoneNumber"
           name="driverPhone{{ i }}"
@@ -92,8 +92,8 @@
           class="form-control"
           type="file"
           id="vehiclePhoto"
-          (change)="onFileSelected($event, i)"
-          accept="image/*"
+          [(ngModel)]="vehicle.vehiclePhoto"
+          placeholder="Enter base64 image string"
         />
       </div>
 
@@ -178,8 +178,6 @@
           Unloading amount is required.
         </div>
       </div>
-
-      <!-- Vehicle Photo -->
 
       <!-- Submit Button -->
       <button

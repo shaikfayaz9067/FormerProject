@@ -7,11 +7,12 @@ export interface Order {
   farmerName: string;
   phoneNumber: number;
   products: Product[];
+  transport: Transport[];
   totalAmountAllProducts: number;
   purchaseDate: string;
   purchaseLocation: string;
   amountStatus: boolean;
   bagtype: string;
-  transport: Transport[];
+
   // address: Address;
 }

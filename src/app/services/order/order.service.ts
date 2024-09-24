@@ -4,6 +4,7 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Order } from '../../models/order';
 import { Product } from '../../models/product';
+import { Transport } from '../../models/transport'; // Import the Transport model
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class OrderService {
     phoneNumber: 0,
     purchaseLocation: '',
     products: [],
-    transport: [], // Updated to reflect the new Transport interface
+    transport: [], // Ensure transport is part of the order
     totalAmountAllProducts: 0,
     purchaseDate: new Date().toISOString(),
     amountStatus: false,
@@ -40,6 +41,15 @@ export class OrderService {
   getOrder(id: string): Observable<Order> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Order>(url).pipe(catchError(this.handleError));
+  }
+
+  // Post current order
+  postCurrentOrder(): Observable<Order> {
+    const currentOrder: Order = this.getCurrentOrder();
+    console.log('Posting the following order:', JSON.stringify(currentOrder));
+    return this.http
+      .post<Order>(`${this.apiUrl}/create`, currentOrder)
+      .pipe(catchError(this.handleError));
   }
 
   // Create a new order
@@ -75,12 +85,20 @@ export class OrderService {
 
   // Update order using BehaviorSubject
   updateOrder(newOrder: Partial<Order>): void {
-    const currentOrder = this.orderState.value; // Accessing the BehaviorSubject's value
+    const currentOrder = this.orderState.value;
     this.orderState.next({ ...currentOrder, ...newOrder });
   }
 
+  // Update order with transport details and post current order
+  updateTransportDetailsAndPost(
+    transportDetails: Transport[]
+  ): Observable<Order> {
+    this.updateOrder({ transport: transportDetails });
+    return this.postCurrentOrder(); // Call postCurrentOrder to send the updated order
+  }
+
   getCurrentOrder(): Order {
-    return this.orderState.value; // Access the current order
+    return this.orderState.value;
   }
 
   // Error handling method

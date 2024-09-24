@@ -17,7 +17,8 @@ const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'payment', component: PaymentComponent },
   { path: 'transport', component: TransportComponent },
-
+  { path: 'inventory', component: InventoryComponent },
+  { path: '**', component: ProcurementLoginComponent },
   {
     path: 'inventory',
     component: InventoryComponent,

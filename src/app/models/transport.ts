@@ -2,7 +2,7 @@ export interface Transport {
   id?: string;
   vehicleType: string;
   vehicleNumber: string;
-  vehiclePhoto: File | null;
+  vehiclePhoto: String;
   driverPhoneNumber: number;
   transportAmount: number;
   driverName: string;

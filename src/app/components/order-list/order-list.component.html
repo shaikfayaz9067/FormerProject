@@ -6,7 +6,7 @@
   <!-- Farmer Information -->
   <div class="card p-4 shadow-sm">
     <h4 class="card-title">Farmer Information</h4>
-    <form (ngSubmit)="addOrder()" #orderForm="ngForm">
+    <form (ngSubmit)="checkout()" #orderForm="ngForm">
       <!-- Farmer Name -->
       <div class="mb-3">
         <label class="form-label" for="farmerName">Farmer Name:</label>
@@ -116,7 +116,7 @@
             <select
               id="category"
               class="form-select"
-              [(ngModel)]="newProduct.category"
+              [(ngModel)]="newProduct.category.name"
               (change)="onCategoryChange($event)"
               name="category"
               required
@@ -139,7 +139,7 @@
             <select
               id="subcategory"
               class="form-select"
-              [(ngModel)]="newProduct.category.subcategories"
+              [(ngModel)]="newProduct.subcategory.name"
               (change)="onSubcategoryChange($event)"
               name="subcategory"
               required
@@ -147,10 +147,10 @@
             >
               <option value="">Select a subcategory</option>
               <option
-                *ngFor="let subcategory of subcategories"
+                *ngFor="let subcategory of filteredSubcategories"
                 [value]="subcategory.name"
               >
-                {{ subcategory.name }}
+                {{ subcategory.subname }}
               </option>
             </select>
           </div>
@@ -166,7 +166,7 @@
           </div>
         </div>
 
-        <div class="mb-3" *ngIf="newProduct.category?.subcategories">
+        <div class="mb-3" *ngIf="newProduct.subcategory">
           <label class="form-label" for="bagtype">Bag Type:</label>
 
           <div *ngFor="let bagType of bagtype">
