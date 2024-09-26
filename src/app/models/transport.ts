@@ -10,5 +10,6 @@ export interface Transport {
   unloadingAmount: number;
   capacity: number;
   weight: number;
+  waybill: number;
   weightExceeded: boolean;
 }

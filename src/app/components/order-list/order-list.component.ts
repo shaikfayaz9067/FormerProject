@@ -154,17 +154,34 @@ export class OrderListComponent implements OnInit {
   }
   buyNow(product: Product) {
     this.orderService.setProducts(this.newOrder.products);
-    this.addProduct();
+    // this.addProduct();
     this.checkout();
     this.router.navigate(['/payment']);
   }
 
   buyAll() {
-    this.addProduct();
+    // this.addProduct();
     this.checkout();
 
     this.orderService.setProducts(this.newOrder.products);
     this.router.navigate(['/payment']);
+  }
+
+  // Assuming 'newOrder' is the order object and contains 'products' array
+  deleteProduct(index: number) {
+    // Remove the product from the products array using splice
+    this.newOrder.products.splice(index, 1);
+
+    // Optionally, you can update the total amount of all products after deleting
+    this.calculateTotalAmountOfAllProducts();
+  }
+
+  // Example of the function to calculate the total amount of all products
+  calculateTotalAmountOfAllProducts() {
+    this.totalAmountOfAllProducts = this.newOrder.products.reduce(
+      (sum, product) => sum + product.totalPrice,
+      0
+    );
   }
 
   calculateTotalProductAmount() {
@@ -200,9 +217,14 @@ export class OrderListComponent implements OnInit {
   checkout() {
     console.log('Order Summary:', this.newOrder);
     this.orderService.updateOrder(this.newOrder);
-    this.orderService.currentOrder$.subscribe((currentOrder) => {
-      console.log('Order updated successfully:', currentOrder);
-    });
+    console.log(
+      'Order updated successfully:',
+      this.orderService.getCurrentOrder()
+    );
+
+    // this.orderService.currentOrder$.subscribe((currentOrder) => {
+
+    // });
   }
 
   generateUniqueId(): string {

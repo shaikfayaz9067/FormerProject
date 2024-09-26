@@ -1,0 +1,14 @@
+.navbar {
+  position: fixed; /* Makes the navbar fixed */
+  width: 100%; /* Ensures navbar takes the full width */
+  z-index: 1000; /* Keeps navbar above other content */
+  margin-bottom: 0; /* Remove default margin below the navbar */
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* Prevents scrolling */
+}

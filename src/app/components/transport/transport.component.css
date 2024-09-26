@@ -1,10 +1,18 @@
 .container {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 20px; /* Added margin to avoid touching the edges of the viewport */
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fixed position */
+  top: 20px; /* Adjust this value to position it vertically */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center adjustment */
+  overflow-y: auto; /* Allows scrolling if the content exceeds the viewport */
+  max-height: calc(
+    100vh - 40px
+  ); /* Ensure it does not exceed viewport height */
 }
 
 h4 {

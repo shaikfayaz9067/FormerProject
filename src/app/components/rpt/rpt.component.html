@@ -1,0 +1,57 @@
+<div class="container mt-5">
+  <h2>Order Details</h2>
+
+  <!-- Farmer Information -->
+  <div class="card p-3 my-4">
+    <h4>Farmer Information</h4>
+    <p><strong>Name:</strong> {{ order.farmerName }}</p>
+    <p><strong>Phone Number:</strong> {{ order.phoneNumber }}</p>
+  </div>
+
+  <!-- Category Dropdown -->
+  <div class="card p-3 my-4">
+    <h4>Select Category</h4>
+    <select class="form-select" [(ngModel)]="selectedCategory">
+      <option
+        *ngFor="let product of order.products"
+        [value]="product.category.name"
+      >
+        {{ product.category.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Product Summary -->
+  <div class="card p-3 my-4">
+    <h4>Product Summary</h4>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Subcategory</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of order.products">
+          <td>{{ product.category.name }}</td>
+          <td>{{ product.subcategory.subname }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.price | currency : "INR" }}</td>
+          <td>{{ product.totalPrice | currency : "INR" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Processing Options -->
+  <div class="card p-3 my-4">
+    <h4>Processing</h4>
+    <select class="form-select">
+      <option value="RiceMill">RiceMill</option>
+      <option value="RedGram">RedGram</option>
+    </select>
+  </div>
+</div>

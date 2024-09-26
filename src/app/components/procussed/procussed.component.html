@@ -1,0 +1,53 @@
+<div class="container mt-5">
+  <h2>Procussed Details</h2>
+
+  <!-- Order Summary -->
+  <div class="card p-3 my-4">
+    <h4>Order Details</h4>
+    <div *ngFor="let order of orders">
+      <h5>Order ID: {{ order.id }}</h5>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Subcategory</th>
+            <th>No of Bags</th>
+            <th>Vehicle Number</th>
+            <th>Driver Number</th>
+            <th>Vehicle Image</th>
+            <th>Transport Amount</th>
+            <th>Hawali Amount</th>
+            <th>Waybill</th>
+            <th>Payment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let product of order.products">
+            <tr>
+              <td>{{ product.category.name }}</td>
+              <td>{{ product.subcategory.subname }}</td>
+              <td>{{ product.quantity }}</td>
+              <td>{{ order.transport[0]?.vehicleNumber }}</td>
+              <td>{{ order.transport[0]?.driverPhoneNumber }}</td>
+              <td>
+                <img
+                  [src]="order.transport[0]?.vehiclePhoto"
+                  alt="Vehicle Image"
+                  style="width: 100px; height: auto"
+                />
+              </td>
+              <td>
+                {{ order.transport[0]?.transportAmount | currency : "INR" }}
+              </td>
+              <td>
+                {{ order.transport[0]?.loadingAmount | currency : "INR" }}
+              </td>
+              <td>{{ order.transport[0]?.id }}</td>
+              <td>{{ order.totalAmountAllProducts | currency : "INR" }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -10,12 +10,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
-import { ProcurementLoginComponent } from './components/procurement-login/procurement-login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartComponent } from './components/cart/cart.component';
 import { TransportComponent } from './components/transport/transport.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PaymentComponent } from './components/payment/payment.component';
+import { RPTComponent } from './components/rpt/rpt.component';
+import { RawinventoryComponent } from './components/rawinventory/rawinventory.component';
+import { ProcussedComponent } from './components/procussed/procussed.component';
+import { ProcessedComponent } from './components/processed/processed.component';
+import { ProstayComponent } from './components/prostay/prostay.component';
+import { HomeInventoryComponent } from './components/home-inventory/home-inventory.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +28,15 @@ import { PaymentComponent } from './components/payment/payment.component';
     LoginPageComponent,
     InventoryComponent,
     OrderListComponent,
-    ProcurementLoginComponent,
     CartComponent,
     PaymentComponent,
     TransportComponent,
+    RPTComponent,
+    RawinventoryComponent,
+    ProcussedComponent,
+    ProcessedComponent,
+    ProstayComponent,
+    HomeInventoryComponent,
   ],
   imports: [
     BrowserModule,

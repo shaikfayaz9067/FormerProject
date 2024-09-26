@@ -6,14 +6,14 @@ export interface Product {
   category: {
     id: string;
     name: string;
-    weight: number; // Ensure this is an array of Subcategory objects
+    weight: number;
   };
   quantity: number;
   price: number;
   totalPrice: number;
   subcategory: {
     name: string;
-    subname: string;
+    subname: string; // This field was missing in the previous examples
     price: number;
   };
 }

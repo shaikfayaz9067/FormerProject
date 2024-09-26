@@ -38,10 +38,11 @@ export class TransportComponent implements OnInit {
       weightExceeded: false,
       vehiclePhoto: '',
       loadingAmount: 0,
+      waybill: 0,
       unloadingAmount: 0,
     };
 
-    // Push the new vehicle into the vehicles array
+    // Push the new  vehicle into the vehicles array
     this.vehicles.push(newVehicle);
 
     // Optionally reset the current vehicle form fields after submission
@@ -92,7 +93,7 @@ export class TransportComponent implements OnInit {
     this.orderService.updateTransportDetailsAndPost(this.vehicles).subscribe(
       (order) => {
         console.log('Order created:', order);
-        this.router.navigate(['/login']);
+        // this.router.navigate(['/plogin']);
         // Handle successful order creation, e.g., navigate or show a success message
       },
       (error) => {
@@ -105,7 +106,7 @@ export class TransportComponent implements OnInit {
   // Method to handle form submission for adding a vehicle
   addVehicleFromForm(index: number) {
     this.addVehicle(index);
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
     // Add a new vehicle and reset the current form
   }
 }

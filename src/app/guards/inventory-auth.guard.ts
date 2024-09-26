@@ -10,17 +10,17 @@ import { AuthService } from '../services/auth/auth.service'; // Adjust the path 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class InventoryAuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    // Check if the user is authenticated and has procurement access
+    // Check if the user is authenticated and has inventory access
     if (
       this.authService.isAuthenticated() &&
-      this.authService.hasProcurementAccess()
+      this.authService.hasInventoryAccess()
     ) {
       return true;
     } else {

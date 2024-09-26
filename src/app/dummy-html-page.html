@@ -219,57 +219,59 @@
         </form>
       </div> -->
 
-
-
-
-
-      import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Order } from '../../models/order'; // Import your Order model here
-import { Product } from '../../models/product';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class OrderService {
-  private apiUrl = 'http://localhost:8081/api/orders'; // Backend API URL
-
-  constructor(private http: HttpClient) {}
-
-  private products: Product[] = [];
-
-  // Get all orders
-  getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.apiUrl);
-  }
-
-  // Get a single order by ID
-  getOrder(id: string): Observable<Order> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.get<Order>(url);
-  }
-
-  // Create a new order
-  createOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(`${this.apiUrl}/create`, order);
-  }
-
-  // Create multiple orders
-  createOrders(orders: Order[]): Observable<Order[]> {
-    return this.http.post<Order[]>(`${this.apiUrl}/createAll`, orders);
-  }
-
-  setProducts(products: Product[]) {
-    this.products = products;
-  }
-
-  getProducts(): Product[] {
-    return this.products;
-  }
-
-  clearProducts() {
-    this.products = [];
-  }
-}
-
+import { Injectable } from '@angular/core'; import { HttpClient } from
+'@angular/common/http'; import { Observable } from 'rxjs'; import { Order } from
+'../../models/order'; // Import your Order model here import { Product } from
+'../../models/product'; @Injectable({ providedIn: 'root', }) export class
+OrderService { private apiUrl = 'http://localhost:8081/api/orders'; // Backend
+API URL constructor(private http: HttpClient) {} private products: Product[] =
+[]; // Get all orders getOrders(): Observable<Order[]>
+  { return this.http.get<Order[]
+    >(this.apiUrl); } // Get a single order by ID getOrder(id: string):
+    Observable<Order>
+      { const url = `${this.apiUrl}/${id}`; return this.http.get<Order
+        >(url); } // Create a new order createOrder(order: Order):
+        Observable<Order>
+          { return this.http.post<Order
+            >(`${this.apiUrl}/create`, order); } // Create multiple orders
+            createOrders(orders: Order[]): Observable<Order[]>
+              { return this.http.post<Order[]
+                >(`${this.apiUrl}/createAll`, orders); } setProducts(products:
+                Product[]) { this.products = products; } getProducts():
+                Product[] { return this.products; } clearProducts() {
+                this.products = []; } } { "farmerName": "John Doe",
+                "phoneNumber": 1234567890, "products": [ { "id": "product1",
+                "category": { "id": "category1", "name": "Fruits", "weight": 1,
+                "subcategories": [ { "name": "Apples", "price": 3 }, { "name":
+                "Bananas", "price": 2 } ] }, "subcategory": { "name": "Apples",
+                "price": 3 }, "quantity": 10, "price": 3, "totalPrice": 30 }, {
+                "id": "product2", "category": { "id": "category2", "name":
+                "Vegetables", "weight": 2, "subcategories": [ { "name":
+                "Carrots", "price": 1 }, { "name": "Broccoli", "price": 2 } ] },
+                "subcategory": { "name": "Carrots", "price": 1 }, "quantity": 5,
+                "price": 1, "totalPrice": 5 } ], "transport": [ { "id":
+                "transport1", "vehicleType": "Truck", "vehicleNumber": "ABC123",
+                "vehiclePhoto": "http://example.com/photo.jpg",
+                "driverPhoneNumber": 9876543210, "driverName": "Jane Smith",
+                "capacity": 1000, "transportAmount": 50.0, "loadingAmount":
+                10.0, "unloadingAmount": 5.0, "weight": 800, "weightExceeded":
+                false } ], "totalAmountAllProducts": 35, "purchaseDate":
+                "2024-09-24T00:00:00Z", "purchaseLocation": "Farmers Market",
+                "amountStatus": true, "bagtype": "Plastic" } resetProductForm()
+                { this.newProduct = { id: '', category: { id: '', name: '',
+                weight: 0, }, quantity: 0, price: 0, totalPrice: 0, subcategory:
+                { name: '', price: 0 }, }; } checkout() { console.log('Order
+                Summary:', this.newOrder);
+                this.orderService.updateOrder(this.newOrder);
+                this.orderService.currentOrder$.subscribe((currentOrder) => {
+                console.log('Order updated successfully:', currentOrder); }); }
+                generateUniqueId(): string { return 'prod_' + Date.now() + '_' +
+                Math.floor(Math.random() * 1000); }</Order[]
+              ></Order[]
+            ></Order
+          ></Order
+        ></Order
+      ></Order
+    ></Order[]
+  ></Order[]
+>

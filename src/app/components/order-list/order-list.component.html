@@ -229,29 +229,35 @@
               <th>Category</th>
               <th>Quantity</th>
               <th>Weight (kg)</th>
-              <!-- Column header for weight -->
               <th>Price</th>
               <th>Total Price</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let product of newOrder.products">
+            <tr *ngFor="let product of newOrder.products; let i = index">
               <td>{{ product.category?.name }}</td>
               <td>{{ product.quantity }}</td>
               <td>
                 {{ product.quantity * (product.category?.weight || 0) }} kg
               </td>
-
-              <!-- Display category weight -->
               <td>{{ product.price | currency : "INR" }}</td>
               <td>{{ product.totalPrice | currency : "INR" }}</td>
               <td>
+                <!-- Buy Now Button -->
                 <button
-                  class="btn btn-primary btn-sm"
+                  class="btn btn-primary btn-sm action-btn"
                   (click)="buyNow(product)"
                 >
                   Buy Now
+                </button>
+
+                <!-- Delete Button -->
+                <button
+                  class="btn btn-danger btn-sm action-btn"
+                  (click)="deleteProduct(i)"
+                >
+                  Delete
                 </button>
               </td>
             </tr>

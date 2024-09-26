@@ -179,19 +179,31 @@
         </div>
       </div>
 
-      <!-- Submit Button -->
-      <button
-        type="submit"
-        class="btn btn-success"
-        [disabled]="vehicleForm.invalid || vehicle.weightExceeded"
-      >
-        Add Vehicle to Order
-      </button>
+      <div class="mb-3">
+        <label class="form-label" for="waybill">Way bill Amount:</label>
+        <input
+          class="form-control"
+          type="number"
+          id="waybill"
+          [(ngModel)]="vehicle.waybill"
+          name="waybill{{ i }}"
+          required
+          #waybill="ngModel"
+        />
+        <div *ngIf="waybill.invalid && waybill.touched" class="text-danger">
+          Way bill required
+        </div>
+      </div>
+
+      <hr />
     </form>
-    <hr />
   </div>
 
-  <button class="btn btn-primary" (click)="completeTransportDetails()">
+  <button
+    type="submit"
+    class="btn btn-primary"
+    (click)="completeTransportDetails()"
+  >
     Complete Transport
   </button>
 </div>
