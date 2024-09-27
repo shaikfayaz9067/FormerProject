@@ -21,6 +21,7 @@ import { ProcussedComponent } from './components/procussed/procussed.component';
 import { ProcessedComponent } from './components/processed/processed.component';
 import { ProstayComponent } from './components/prostay/prostay.component';
 import { HomeInventoryComponent } from './components/home-inventory/home-inventory.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { HomeInventoryComponent } from './components/home-inventory/home-invento
     ProcessedComponent,
     ProstayComponent,
     HomeInventoryComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

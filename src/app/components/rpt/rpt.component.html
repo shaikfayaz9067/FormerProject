@@ -1,12 +1,12 @@
 <div class="container mt-5">
-  <h2>Order Details</h2>
+  <h2>RPT Details</h2>
 
   <!-- Farmer Information -->
-  <div class="card p-3 my-4">
+  <!-- <div class="card p-3 my-4">
     <h4>Farmer Information</h4>
     <p><strong>Name:</strong> {{ order.farmerName }}</p>
     <p><strong>Phone Number:</strong> {{ order.phoneNumber }}</p>
-  </div>
+  </div> -->
 
   <!-- Category Dropdown -->
   <div class="card p-3 my-4">
@@ -14,6 +14,18 @@
     <select class="form-select" [(ngModel)]="selectedCategory">
       <option
         *ngFor="let product of order.products"
+        [value]="product.category.name"
+      >
+        {{ product.category.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="card p-3 my-4" *ngIf="selectedCategory">
+    
+    <select class="form-select" [(ngModel)]="processing">
+      <option
+        *ngFor="let product of order.products"ð
         [value]="product.category.name"
       >
         {{ product.category.name }}

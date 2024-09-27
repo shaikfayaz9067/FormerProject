@@ -84,7 +84,7 @@
         </div>
       </div>
 
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label class="form-label" for="vehiclePhoto"
           >Upload Vehicle Photo:</label
         >
@@ -94,6 +94,18 @@
           id="vehiclePhoto"
           [(ngModel)]="vehicle.vehiclePhoto"
           placeholder="Enter base64 image string"
+        />
+      </div> -->
+
+      <div class="mb-3">
+        <label class="form-label" for="vehiclePhoto"
+          >Upload Vehicle Photo:</label
+        >
+        <input
+          class="form-control"
+          type="file"
+          id="vehiclePhoto"
+          (change)="onFileSelected($event, i)"
         />
       </div>
 

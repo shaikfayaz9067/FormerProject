@@ -82,6 +82,36 @@ export class TransportComponent implements OnInit {
     }
   }
 
+  // handleFileInput(event: any, index: number) {
+  //   const file: File = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       this.vehicles[index].vehiclePhoto = reader.result as string; // Base64 string
+  //     };
+  //     reader.readAsDataURL(file); // Convert image to Base64
+  //   }
+  // }
+
+  onFileSelected(event: any, index: number) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        let base64String = reader.result as string;
+
+        // Clean up the Base64 string by removing the 'data:image/jpeg;base64,' part
+        const base64Image = base64String.replace(
+          /^data:image\/[a-z]+;base64,/,
+          ''
+        );
+
+        this.vehicles[index].vehiclePhoto = base64Image; // Only store the clean Base64 string
+      };
+      reader.readAsDataURL(file); // Converts the file to Base64
+    }
+  }
+
   // Checks if the weight exceeds the vehicle capacity
   checkWeight(index: number) {
     this.vehicles[index].weightExceeded =

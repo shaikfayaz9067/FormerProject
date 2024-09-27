@@ -5,7 +5,12 @@
   <div class="card p-3 my-4">
     <h4>Order Details</h4>
     <div *ngFor="let order of orders">
-      <h5>Order ID: {{ order.id }}</h5>
+      <h5>
+        Order ID: {{ order.id }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Farmer
+        Name:
+        {{ order.farmerName }}
+      </h5>
+
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -29,20 +34,24 @@
               <td>{{ product.quantity }}</td>
               <td>{{ order.transport[0]?.vehicleNumber }}</td>
               <td>{{ order.transport[0]?.driverPhoneNumber }}</td>
+
               <td>
                 <img
-                  [src]="order.transport[0]?.vehiclePhoto"
+                  [src]="
+                    'data:image/jpeg;base64,' + order.transport[0]?.vehiclePhoto
+                  "
                   alt="Vehicle Image"
                   style="width: 100px; height: auto"
                 />
               </td>
+
               <td>
                 {{ order.transport[0]?.transportAmount | currency : "INR" }}
               </td>
               <td>
                 {{ order.transport[0]?.loadingAmount | currency : "INR" }}
               </td>
-              <td>{{ order.transport[0]?.id }}</td>
+              <td>{{ order.transport[0]?.waybill }}</td>
               <td>{{ order.totalAmountAllProducts | currency : "INR" }}</td>
             </tr>
           </ng-container>

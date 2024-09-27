@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Order } from 'src/app/models/order';
+import { OrderService } from 'src/app/services/order/order.service';
 
 @Component({
   selector: 'app-rpt',
@@ -8,41 +10,19 @@ import { Component, OnInit } from '@angular/core';
 export class RPTComponent implements OnInit {
   order: any;
   selectedCategory: string | undefined;
+  orders: Order[] = [];
+processing: any;
+
+  constructor(private orderService:OrderService) { 
+
+  }
 
   ngOnInit() {
-    this.order = {
-      farmerName: 'fayaz shaik',
-      phoneNumber: 6767676676,
-      products: [
-        {
-          _id: 'prod_1727265312333_865',
-          category: {
-            _id: '66f296adf1b23d2918693daf',
-            name: 'Wheat',
-            weight: 100,
-          },
-          subcategory: { name: 'Wheat', subname: 'Red Wheat' },
-          price: 130,
-          quantity: 5,
-          totalPrice: 650,
-        },
-      ],
-      transport: [
-        {
-          vehicleType: 'Van',
-          vehicleNumber: 'TS07he9909',
-          driverPhoneNumber: 9000989808,
-          driverName: 'juresh',
-          transportAmount: 6,
-          loadingAmount: 7,
-          unloadingAmount: 7,
-        },
-      ],
-      totalAmountAllProducts: 650,
-      purchaseLocation: 'Munagala',
-      amountStatus: true,
-      bagtype: 'Rice Bag',
-    };
+  
+    this.orderService.getOrders().subscribe((data) => { 
+      this.orders = data;
+    })
+    
 
     this.selectedCategory = this.order.products[0]?.category.name;
   }
