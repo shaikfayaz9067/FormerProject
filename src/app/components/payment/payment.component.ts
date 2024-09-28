@@ -76,7 +76,10 @@ export class PaymentComponent {
     }
 
     // Update the amountStatus in the shared OrderService
-    this.orderService.updateOrder({ amountStatus: true });
+    this.orderService.updateOrder({
+      amountStatus: true,
+      paymentMode: this.paymentMode,
+    });
 
     // Show success message
     this.openSnackBar('Payment Successful! Add vehicle details.', 'Close');

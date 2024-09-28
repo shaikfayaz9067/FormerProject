@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,13 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
   logout() {
-    // Here, clear any session data or authentication tokens if applicable
-    // For example, localStorage.clear() if you're using localStorage for session
-    localStorage.clear(); // or sessionStorage.clear();
+    // Clear only the session-specific data from localStorage
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userRole');
 
-    // Navigate the user to the login page
+    // Call AuthService's logout function (if applicable) to update the logged-in status
+    this.authService.logout();
+
+    // Redirect the user to the login page
     this.router.navigate(['/login']);
   }
 }

@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
-import { AuthService } from '../services/auth/auth.service'; // Adjust the path as needed
+import { AuthService } from '../services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,15 +17,13 @@ export class InventoryAuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    // Check if the user is authenticated and has inventory access
     if (
       this.authService.isAuthenticated() &&
       this.authService.hasInventoryAccess()
     ) {
       return true;
     } else {
-      // Redirect to the login page if not authenticated
-      this.router.navigate(['/login']);
+      // this.router.navigate(['/home']); // Redirect unauthorized users
       return false;
     }
   }

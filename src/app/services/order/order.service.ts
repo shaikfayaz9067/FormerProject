@@ -24,6 +24,7 @@ export class OrderService {
     purchaseDate: new Date().toISOString(),
     amountStatus: false,
     bagtype: '',
+    paymentMode: '',
   });
 
   currentOrder$ = this.orderState.asObservable(); // Observable for the current order

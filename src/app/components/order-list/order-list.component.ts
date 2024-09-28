@@ -25,6 +25,7 @@ export class OrderListComponent implements OnInit {
     purchaseDate: new Date().toISOString(),
     amountStatus: false,
     bagtype: '',
+    paymentMode: '',
   };
 
   newProduct: Product = {

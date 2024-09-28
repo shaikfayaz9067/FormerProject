@@ -5,27 +5,25 @@ import {
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
-import { AuthService } from '../services/auth/auth.service'; // Adjust the path as needed
+import { AuthService } from '../services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class ProcurementAuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    // Check if the user is authenticated and has procurement access
     if (
       this.authService.isAuthenticated() &&
       this.authService.hasProcurementAccess()
     ) {
       return true;
     } else {
-      // Redirect to the login page if not authenticated
-      this.router.navigate(['/login']);
+      // this.router.navigate(['/login']); // Redirect unauthorized users
       return false;
     }
   }

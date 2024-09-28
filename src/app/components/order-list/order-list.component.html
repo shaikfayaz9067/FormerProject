@@ -214,7 +214,22 @@
         </div>
 
         <div>
-          <button type="button" (click)="addProduct()" class="btn btn-primary">
+          <button
+            type="button"
+            (click)="addProduct()"
+            class="btn btn-primary"
+            [disabled]="
+              !newProduct.category?.name ||
+              !newProduct.quantity ||
+              !newProduct.subcategory?.name
+            "
+            [ngClass]="{
+              'btn-disabled':
+                !newProduct.category?.name ||
+                !newProduct.quantity ||
+                !newProduct.subcategory?.name
+            }"
+          >
             Add Product
           </button>
         </div>
@@ -248,6 +263,11 @@
                 <button
                   class="btn btn-primary btn-sm action-btn"
                   (click)="buyNow(product)"
+                  *ngIf="
+                    newOrder.farmerName &&
+                    newOrder.phoneNumber &&
+                    newOrder.purchaseLocation
+                  "
                 >
                   Buy Now
                 </button>
@@ -270,7 +290,17 @@
 
         <!-- Buy All Button -->
         <div class="text-end">
-          <button class="btn btn-success" (click)="buyAll()">Buy All</button>
+          <button
+            class="btn btn-success"
+            (click)="buyAll()"
+            *ngIf="
+              newOrder.farmerName &&
+              newOrder.phoneNumber &&
+              newOrder.purchaseLocation
+            "
+          >
+            Buy All
+          </button>
         </div>
       </div>
 

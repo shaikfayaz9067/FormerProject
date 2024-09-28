@@ -13,6 +13,7 @@ export interface Order {
   purchaseLocation: string;
   amountStatus: boolean;
   bagtype: string;
+  paymentMode: string;
 
   // address: Address;
 }

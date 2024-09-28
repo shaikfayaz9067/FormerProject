@@ -13,44 +13,69 @@ import { ProstayComponent } from './components/prostay/prostay.component';
 import { HomeInventoryComponent } from './components/home-inventory/home-inventory.component';
 import { NavbarGuard } from './guards/navbar.guard';
 import { ProcessedComponent } from './components/processed/processed.component';
+import { ProcurementAuthGuard } from './guards/procurement-auth.guard';
+import { InventoryAuthGuard } from './guards/inventory-auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginPageComponent },
-  { path: 'orders', component: OrderListComponent },
-  { path: 'payment', component: PaymentComponent },
-  { path: 'transport', component: TransportComponent },
+  {
+    path: 'login',
+    component: LoginPageComponent,
+  },
+  {
+    path: 'orders',
+    component: OrderListComponent,
+    canActivate: [ProcurementAuthGuard],
+  },
+  {
+    path: 'payment',
+    component: PaymentComponent,
+    // canActivate: [ProcurementAuthGuard],
+  },
+  {
+    path: 'transport',
+    component: TransportComponent,
+    canActivate: [ProcurementAuthGuard],
+  },
 
   // Home route without auth guard
   {
     path: 'home',
     component: HomeInventoryComponent,
-    canActivate: [NavbarGuard],
+    canActivate: [NavbarGuard, InventoryAuthGuard],
   },
 
   // Procurement routes without auth guard
   {
     path: 'procussed',
     component: ProcussedComponent,
-    canActivate: [NavbarGuard],
+    canActivate: [NavbarGuard, InventoryAuthGuard],
   },
-  { path: 'rpt', component: RPTComponent, canActivate: [NavbarGuard] },
+  {
+    path: 'rpt',
+    component: RPTComponent,
+    canActivate: [NavbarGuard, InventoryAuthGuard],
+  },
   {
     path: 'processed',
     component: ProcessedComponent,
-    canActivate: [NavbarGuard],
+    canActivate: [NavbarGuard, InventoryAuthGuard],
   },
-  { path: 'prostay', component: ProstayComponent, canActivate: [NavbarGuard] },
+  {
+    path: 'prostay',
+    component: ProstayComponent,
+    canActivate: [NavbarGuard, InventoryAuthGuard],
+  },
 
   {
     path: 'rawinventory',
     component: RawinventoryComponent,
-    canActivate: [NavbarGuard],
+    canActivate: [NavbarGuard, InventoryAuthGuard],
   },
   {
     path: 'inventory',
     component: InventoryComponent,
-    canActivate: [NavbarGuard],
+    canActivate: [NavbarGuard, InventoryAuthGuard],
   },
 
   // Catch-all route
